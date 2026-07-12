@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Leads</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background: #f4f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container{
+            background: white;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2{
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .form-container p{
+            text-align: center;
+            margin-bottom: 30px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .input-group{
+            display: flex;
+            flex-direction: column;
+        }
+
+        label{
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input,
+        select{
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus{
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+        }
+
+        button{
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background: #1d4ed8;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Fale com Nossa Equipe</h2>
+        <p>Preencha os dados abaixo e entraremos em contato.</p>
+
+        <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=ORG_ID" method="POST">
+            <input type="hidden" name="oid" value="ORG_ID">
+
+            <input type="hidden" name="retURL" value="http://127.0.0.1:5500/return_page.html">
+
+            <div class="input-group">
+                <label for="first_name">Primeiro Nome</label>
+                <input id="first_name" maxlength="40" name="first_name" type="text">
+            </div>
+
+            <div class="input-group">
+                <label for="last_name">Sobrenome</label>
+                <input id="last_name" maxlength="80" name="last_name" type="text">
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input id="email" maxlength="80" name="email" type="email">
+            </div>
+
+            <div class="input-group">
+                <label for="company">Empresa</label>
+                <input id="company" maxlength="40" name="company" type="text">
+            </div>
+
+            <div class="input-group">
+                <label for="industry">Setor</label>
+
+                <select id="industry" name="industry">
+                    <option value="">Selecione</option>
+                    <option value="Educacao">Educação</option>
+                    <option value="Financeiro">Financeiro</option>
+                    <option value="Saude">Saúde</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
