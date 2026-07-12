@@ -16,6 +16,7 @@ public with sharing class OnboardingService {
         for(Opportunity opportunities : opps){
             
             Entitlement ent = new Entitlement(
+                Name = 'Direito ' + opportunities.Name,
                 AccountId = opportunities.AccountId,
                 StartDate = System.today(),
                 EndDate = System.today().addYears(1)
