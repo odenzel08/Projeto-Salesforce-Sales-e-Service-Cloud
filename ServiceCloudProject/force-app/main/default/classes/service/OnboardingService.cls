@@ -4,6 +4,7 @@ public with sharing class OnboardingService {
 
         List<Entitlement> entToInsert = new List<Entitlement>();
         List<Case> caseToInsert = new List<Case>();
+        Map <Id, Entitlement> mapDireito = new Map<Id, Entitlement>();
 
 
         //Query para buscar os Processos de Direitos
@@ -29,19 +30,24 @@ public with sharing class OnboardingService {
                     ent.SlaProcessId = standard.Id;
                 }
                 entToInsert.add(ent);
-                
-                //Processo de criação do Case de Onboarding
-                Case onboardingCase = new Case();
-                onboardingCase.Subject = 'Onboarding ' + opportunities.Name;
-                onboardingCase.Origin = 'Close Won Deal';
-                onboardingCase.AccountId = opportunities.AccountId;
-                onboardingCase.Status = 'New';
-                caseToInsert.add(onboardingCase);
+                mapDireito.put(opportunities.Id, ent);
         }
-        //DML único 
         insert entToInsert;
-        insert caseToInsert;
 
+        for (Opportunity opportunities : opps){
+            //Processo de criação do Case de Onboarding
+            Case onboardingCase = new Case();
+
+            Entitlement direito = mapDireito.get(opportunities.Id);
+
+            onboardingCase.Subject = 'Onboarding ' + opportunities.Name;
+            onboardingCase.Origin = 'Close Won Deal';
+            onboardingCase.AccountId = opportunities.AccountId;
+            onboardingCase.Status = 'New';
+            onboardingCase.EntitlementId = direito.Id;
+            caseToInsert.add(onboardingCase);
+        }
+        insert caseToInsert;
         createOnboardingChecklist(caseToInsert);
     }
     
