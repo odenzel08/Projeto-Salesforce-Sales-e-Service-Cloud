@@ -14,8 +14,10 @@ public with sharing class OpportunityTriggerHandler {
         for (Opportunity opp : newOpp){
 
             Opportunity old = oldMap.get(opp.Id);
-            if(opp.StageName != old.StageName){
-                OnboardingService.processOnboarding(newOpp);
+            if(opp.StageName == 'Closed Won'){
+                if(opp.StageName != old.StageName){
+                    OnboardingService.processOnboarding(newOpp);
+                }
             }
         }
     }
